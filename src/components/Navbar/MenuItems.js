@@ -16,13 +16,13 @@ export const MenuItems = [
     title: "Availability and Price",
     url: "/price",
     cName: "nav-links",
-    icon: "fa-solid fa-circle-dollar",
+    icon: "fa-solid fa-magnifying-glass-dollar",
   },
   {
     title: "Photos",
     url: "/photos",
     cName: "nav-links",
-    icon: "fa-solid fa-aperture",
+    icon: "fa-solid fa-image",
   },
   {
     title: "Contact",

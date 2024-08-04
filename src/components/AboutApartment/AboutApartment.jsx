@@ -1,5 +1,7 @@
 import "../AboutApartment/AboutApartmentStyles.css";
-
+import doublebed from "../../assets/double-bed.png";
+import singlebed from "../../assets/single-bed.png";
+import aircondition from "../../assets/air-conditioner.png";
 function AboutApartment() {
   return (
     <div className="about-container">
@@ -60,7 +62,7 @@ function AboutApartment() {
         <div className="features">
           <div className="feature">
             <div>
-              <i className="fa-regular fa-water-ladder"></i>
+              <i className="fa-solid fa-water-ladder"></i>
               <span>Swimming pool</span>
             </div>
           </div>
@@ -71,8 +73,8 @@ function AboutApartment() {
             </div>
           </div>
           <div className="feature">
-            <div>
-              <i className="fa-regular fa-air-conditioner"></i>{" "}
+            <div className="icon">
+              <img className="image" src={aircondition} alt="air conditioner" />
               <span>Air-Conditioned</span>
             </div>
           </div>
@@ -89,7 +91,7 @@ function AboutApartment() {
         <div className="bedrooms">
           <div className="bedroom-item ">
             <div className="bed-icons">
-              <i className="fa-sharp fa-light fa-bed-front"></i>
+              <img className="bed" src={doublebed} alt="double bed" />
             </div>
             <span className="room-type">Bedroom 1</span>
             <div className="bed">
@@ -99,8 +101,8 @@ function AboutApartment() {
 
           <div className="bedroom-item ">
             <div className="bed-icons">
-              <i className="fa-sharp fa-light fa-bed-front"></i>
-              <i className="fa-sharp fa-light fa-bed-front"></i>
+              <img className="bed" src={singlebed} alt="single bed" />
+              <img className="bed" src={singlebed} alt="single bed" />
             </div>
             <span className="room-type">Bedroom 2</span>
             <div className="bed">

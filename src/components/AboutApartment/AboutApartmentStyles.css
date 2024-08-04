@@ -3,7 +3,6 @@
   color: #2a2a2a;
   text-align: start;
   overflow: hidden;
-
 }
 
 .about-container h1 {
@@ -31,10 +30,12 @@
   margin-top: 10px;
   padding: 0;
 }
-#bedrooms .bed-icons i {
-  color: #505050;
-  font-size: 28px;
-  margin-right: 8px;
+#bedrooms .bed-icons {
+  .bed {
+    width: 28px;
+    height: 28px;
+    margin-right: 4px;
+  }
 }
 
 #bedrooms .room-type {
@@ -57,6 +58,14 @@
 #mainFeatures .features .feature {
   flex-basis: calc(50% - 16px);
   margin: 32px 16px 0 0;
+  .icon {
+    display: flex;
+    gap:18px;
+    .image {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 #mainFeatures .features .feature i {
@@ -72,7 +81,7 @@
 #kitchen > div:first-of-type .kitchen-item {
   flex-basis: calc(33.333% - 16px);
   margin: 16px 16px 0 0;
-  font-weight: 400;
+  font-weight: 500;
 }
 .separate-sections {
   border-top: 1px solid #ddd;
@@ -159,6 +168,12 @@
           span {
             font-size: 16px;
           }
+          .icon {
+            img {
+              width: 28px;
+              height: 28px;
+            }
+          }
         }
       }
     }
@@ -189,6 +204,7 @@
         .general-item {
           margin: 10px 10px 0 0;
           font-size: 16px;
+          color: #2a2a2a;
         }
       }
     }
