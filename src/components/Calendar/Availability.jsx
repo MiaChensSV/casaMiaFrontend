@@ -2,12 +2,7 @@ import "../Calendar/Availability.css";
 import React, { useState, useEffect } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  isBefore,
-  isSameDay,
-  startOfDay,
-  isWithinInterval,
-} from "date-fns";
+import { isBefore, isSameDay, startOfDay, isWithinInterval } from "date-fns";
 import { getResponsiveMonthsShown } from "../ResponsiveMonths";
 import { useDispatch } from "react-redux";
 import fetchEvents from "../../util/http";
@@ -37,28 +32,36 @@ const Availability = ({ defaultMonthsShown = 1 }) => {
         start: startOfDay(new Date(range.startDate)),
         end: startOfDay(new Date(range.endDate)),
       }));
-      const isDayBlockedFunc = (date) => {
-        const dateStart = startOfDay(date);
-        const today = startOfDay(new Date());
-        return (
-          isBefore(dateStart, today) ||
-          eventRanges.some((range) =>
-            isWithinInterval(dateStart, { start: range.start, end: range.end })
-          )
-        );
-      };
-      
+
       const getDayClassFunc = (date) => {
         const dateStart = startOfDay(date);
         // find which ranges include current day?
         const ranges = eventRanges.filter((range) =>
           isWithinInterval(dateStart, { start: range.start, end: range.end })
         );
-        if (ranges.length === 0){ return "";}  // Not booked
-        if (ranges.length === 2) {return "full-booked";}
-        if (ranges.length === 1 && isSameDay(dateStart, ranges[0].start)){ return "start-booked"}
-        if (ranges.length === 1 && isSameDay(dateStart, ranges[0].end)){  return "end-booked";}
+        if (ranges.length === 0) {
+          return "";
+        } // Not booked
+        if (ranges.length === 2) {
+          return "full-booked";
+        }
+        if (ranges.length === 1 && isSameDay(dateStart, ranges[0].start)) {
+          return "start-booked";
+        }
+        if (ranges.length === 1 && isSameDay(dateStart, ranges[0].end)) {
+          return "end-booked";
+        }
         return "mid-booked"; // Somewhere in between
+      };
+      const isDayBlockedFunc = (date) => {
+        const dateStart = startOfDay(date);
+        const today = startOfDay(new Date());
+        const dayClass = getDayClassFunc(date);
+        return (
+          isBefore(dateStart, today) ||
+          dayClass === "full-booked" ||
+          dayClass === "mid-booked"
+        );
       };
       setIsDayBlocked(() => isDayBlockedFunc);
       setGetDayClass(() => getDayClassFunc);

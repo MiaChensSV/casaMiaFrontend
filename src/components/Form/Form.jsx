@@ -10,12 +10,7 @@ import fetchEvents from "../../util/http";
 import { setCalendarEvent } from "../../store/calendarReducer";
 import adjustEventEndDate from "../../util/AdjustEndDate";
 import { useAppSelector } from "../../store";
-import {
-  isBefore,
-  isSameDay,
-  startOfDay,
-  isWithinInterval,
-} from "date-fns";
+import { isBefore, isSameDay, startOfDay, isWithinInterval } from "date-fns";
 const ContactForm = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -46,17 +41,7 @@ const ContactForm = () => {
         start: startOfDay(new Date(range.startDate)),
         end: startOfDay(new Date(range.endDate)),
       }));
-      const isDayBlockedFunc = (date) => {
-        const dateStart = startOfDay(date);
-        const today = startOfDay(new Date());
-        return (
-          isBefore(dateStart, today) ||
-          eventRanges.some((range) =>
-            isWithinInterval(dateStart, { start: range.start, end: range.end })
-          )
-        );
-      };
-      
+
       const getDayClassFunc = (date) => {
         const dateStart = startOfDay(date);
         // find which ranges include current day?
@@ -76,6 +61,17 @@ const ContactForm = () => {
           return "end-booked";
         }
         return "mid-booked"; // Somewhere in between
+      };
+
+      const isDayBlockedFunc = (date) => {
+        const dateStart = startOfDay(date);
+        const today = startOfDay(new Date());
+        const dayClass = getDayClassFunc(date);
+        return (
+          isBefore(dateStart, today) ||
+          dayClass === "full-booked" ||
+          dayClass === "mid-booked"
+        );
       };
       setIsDayBlocked(() => isDayBlockedFunc);
       setGetDayClass(() => getDayClassFunc);
@@ -98,7 +94,7 @@ const ContactForm = () => {
       setFormErrors((prevErrors) => ({
         ...prevErrors,
         totalGroupSize: "Total group size must be less than 4",
-      }))
+      }));
     }
   };
 
@@ -177,7 +173,7 @@ const ContactForm = () => {
       setIsSubmitted(true);
       setShowSuccessMessage(true);
       window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
-      const backendURL = process.env.REACT_APP_BACKENDURL
+      const backendURL = process.env.REACT_APP_BACKENDURL;
       axios
         .post(backendURL, {
           fullName,
@@ -255,7 +251,9 @@ const ContactForm = () => {
                     const isToday = isSameDay(startOfDay(date), today);
                     const dayClass = getDayClass(date);
                     return (
-                      <div className={`day ${isToday ? "today" : ""} ${dayClass}`}>
+                      <div
+                        className={`day ${isToday ? "today" : ""} ${dayClass}`}
+                      >
                         {day}
                       </div>
                     );
@@ -280,7 +278,9 @@ const ContactForm = () => {
                     const isToday = isSameDay(startOfDay(date), today);
                     const dayClass = getDayClass(date);
                     return (
-                      <div className={`day ${isToday ? "today" : ""} ${dayClass}`}>
+                      <div
+                        className={`day ${isToday ? "today" : ""} ${dayClass}`}
+                      >
                         {day}
                       </div>
                     );
