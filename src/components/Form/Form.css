@@ -196,11 +196,31 @@ h1 {
   background-color: #cccccc;
   cursor: not-allowed;
 }
-
+.loading-image{
+  width: 95vw;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-image img {
+  width: 100px;
+  height: 100px;
+}
 .success-message {
   margin: 10px;
   background-color: #d4edda;
   color: #155724;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.retry-message {
+  margin: 10px;
+  background-color: #f3afbe;
+  color: red;
   padding: 10px;
   margin-top: 20px;
   border: 1px solid #ccc;

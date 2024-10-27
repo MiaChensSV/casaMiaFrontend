@@ -11,6 +11,8 @@ import { setCalendarEvent } from "../../store/calendarReducer";
 import adjustEventEndDate from "../../util/AdjustEndDate";
 import { useAppSelector } from "../../store";
 import { isBefore, isSameDay, startOfDay, isWithinInterval } from "date-fns";
+import loading from "../../assets/loading.gif";
+
 const ContactForm = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,6 +27,8 @@ const ContactForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false); // State to track form submission success
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
 
   const [getDayClass, setGetDayClass] = useState(() => () => "");
   const [isDayBlocked, setIsDayBlocked] = useState(() => () => false);
@@ -194,6 +198,7 @@ const ContactForm = () => {
             console.log("Email sent successfully:");
           }else{
             setIsLoading(false);
+            setIsError(true)
             console.error("Error with status code:", response.status);
           }
         })
@@ -367,14 +372,20 @@ const ContactForm = () => {
             </div>
           </form>
         </>
-      ) : (
-        showSuccessMessage && (
-          <div className="success-message">
-            <p>Email sent successfully!</p>
-            <p>We will get back to you as soon as possible.</p>
-          </div>
-        )
-      )}
+      ) : isLoading ? (
+        <div className="loading-image">
+          <img src={loading} alt="Loading..." />
+        </div>
+      ) : showSuccessMessage ? (
+        <div className="success-message">
+          <p>Email sent successfully!</p>
+          <p>We will get back to you as soon as possible.</p>
+        </div>
+      ) : isError ? (
+        <div className="retry-message">
+          <p>Something went wrong. Please try again or send us email to casamiaguests@gmail.com.</p>
+        </div>
+      ) : null}
     </>
   );
 };
