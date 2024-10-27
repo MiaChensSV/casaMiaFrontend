@@ -192,7 +192,7 @@ const ContactForm = () => {
           message,
         })
         .then((response) => {
-          if(response.status == 200){
+          if(response.status === 200){
             setIsLoading(false);
             setShowSuccessMessage(true);
             console.log("Email sent successfully:");
