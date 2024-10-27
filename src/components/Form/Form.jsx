@@ -24,6 +24,7 @@ const ContactForm = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false); // State to track form submission success
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [getDayClass, setGetDayClass] = useState(() => () => "");
   const [isDayBlocked, setIsDayBlocked] = useState(() => () => false);
@@ -171,7 +172,7 @@ const ContactForm = () => {
     if (Object.keys(errors).length === 0) {
       // Handle form submission logic here (e.g., send data to server)
       setIsSubmitted(true);
-      setShowSuccessMessage(true);
+      setIsLoading(true);
       window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
       const backendURL = process.env.REACT_APP_BACKENDURL;
       axios
@@ -187,9 +188,17 @@ const ContactForm = () => {
           message,
         })
         .then((response) => {
-          console.log("Email sent successfully:", response);
+          if(response.status == 200){
+            setIsLoading(false);
+            setShowSuccessMessage(true);
+            console.log("Email sent successfully:");
+          }else{
+            setIsLoading(false);
+            console.error("Error with status code:", response.status);
+          }
         })
         .catch((error) => {
+          setIsLoading(false);
           console.error("Error sending email:", error);
         });
     }
