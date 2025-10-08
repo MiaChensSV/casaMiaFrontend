@@ -6,10 +6,13 @@ import Footer from "../components/Footer/Footer";
 import AboutImg from "../assets/PlayaElChucho.jpg";
 import PriceInclude from "../components/RentingInclude/Include";
 import Gallery from "../components/Gallery/Gallery";
-import { aboutApartmentImage } from "../components/Data/ImageData";
 import ScrollToTop from "../util/ScrollToTop";
+import { useParams } from "react-router-dom";
+import { apartmentImages } from "../components/Data/ImageData";
 
 function AvailabilityAndPrice() {
+  const { apartmentId } = useParams(); // "casa-mia" or "casa-stella"
+  const images = apartmentImages[apartmentId] || [];
   return (
     <>
       <ScrollToTop />
@@ -23,7 +26,7 @@ function AvailabilityAndPrice() {
       <PriceInclude />
       <Price />
       <Availability monthsShown={3} />
-      <Gallery images={aboutApartmentImage} />
+      <Gallery images={images} />
       <Footer />
     </>
   );

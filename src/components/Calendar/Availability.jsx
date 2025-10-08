@@ -9,18 +9,23 @@ import fetchEvents from "../../util/http";
 import { setCalendarEvent } from "../../store/calendarReducer";
 import { useAppSelector } from "../../store";
 import adjustEventEndDate from "../../util/AdjustEndDate";
+import { useParams } from "react-router-dom"; 
 
 const Availability = ({ defaultMonthsShown = 1 }) => {
+  const { apartmentId } = useParams();
   const [monthsShown, setMonthsShown] = useState(defaultMonthsShown);
   const [getDayClass, setGetDayClass] = useState(() => () => "");
   const [isDayBlocked, setIsDayBlocked] = useState(() => () => false);
   const bookedDateRanges = useAppSelector((state) => state.calendar.events);
 
-  const updateMonthsShown = () => {
-    const months = getResponsiveMonthsShown();
-    setMonthsShown(months);
-  };
   const dispatch = useDispatch();
+
+  // Choose calendar ID based on URL
+  const calendarId =
+    apartmentId === "casa-stella"
+      ? process.env.REACT_APP_CALENDAR_ID_CASA_STELLA
+      : process.env.REACT_APP_CALENDAR_ID_CASA_MIA;
+
   useEffect(() => {
     if (bookedDateRanges == null) {
       fetchEvents().then((result) => {
@@ -66,9 +71,10 @@ const Availability = ({ defaultMonthsShown = 1 }) => {
       setIsDayBlocked(() => isDayBlockedFunc);
       setGetDayClass(() => getDayClassFunc);
     }
-  }, [dispatch, bookedDateRanges]);
+  }, [dispatch, bookedDateRanges, calendarId]);
 
   useEffect(() => {
+    const updateMonthsShown = () => setMonthsShown(getResponsiveMonthsShown());
     updateMonthsShown();
     window.addEventListener("resize", updateMonthsShown);
     return () => {

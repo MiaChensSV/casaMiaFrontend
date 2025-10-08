@@ -10,3 +10,11 @@
   text-align: center;
 }
 
+.clickable-apartment,
+.clickable-apartment:hover,
+.clickable-apartment:visited,
+.clickable-apartment:active,
+.clickable-apartment:focus {
+  color: inherit !important;
+  text-decoration: none;
+}

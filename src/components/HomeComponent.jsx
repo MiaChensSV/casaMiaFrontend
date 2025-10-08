@@ -1,22 +1,35 @@
 import React from "react";
-import apartment from "../assets/apartment.jpg";
+import apartmentCasaMia from "../assets//casa-mia/apartment.jpg";
+import apartmentCasaStella from "../assets/casa-stella/balcony2.jpg"
 import balconyDeEuropa from "../assets/balconyDeEuropa.jpg";
+import livingroomStella from "../assets/casa-stella/livingroom2.jpg"
 import burrina from "../assets/burriana.jpg";
 import playaElChucho from "../assets/PlayaElChucho.jpg";
 import HomeData from "./HomeData";
+import { Link } from "react-router-dom";
 
 const HomeComponent = () => {
   return (
     <>
       <div className="destination">
-      
-        <HomeData
-          className="first-des"
-          heading="Casa Mia, Parador"
-          text="Fantastic 2 bedroom apartment with fantastic pool, gardens and mountain views in Parador, Nerja! Centrally located in the complex of Coronado. Perfect location: only 150 m to the beach, 5 minutes to Balcon de Europa! Close to supermarkets, bars, restaurants, and pharmacies for your convenience! "
-          img1={apartment}
-          img2={balconyDeEuropa}
-        />
+        <Link to="/casa-mia/apartment" className="home-link-wrapper clickable-apartment">
+          <HomeData
+            className="first-des"
+            heading="Casa Mia, Parador"
+            text="Fantastic 2 bedroom apartment with fantastic pool, gardens and mountain views in Parador, Nerja! Centrally located in the complex of Coronado. Perfect location: only 150 m to the beach, 5 minutes to Balcon de Europa! Close to supermarkets, bars, restaurants, and pharmacies for your convenience! "
+            img1={apartmentCasaMia}
+            img2={balconyDeEuropa}
+          />
+        </Link>
+        <Link to="/casa-stella/apartment" className="home-link-wrapper clickable-apartment">
+          <HomeData
+              className="first-des"
+              heading="Casa Stella, Parador"
+              text="Fantastic 2 bedroom apartment with fantastic pool, city and mountain views in Parador, Nerja! Enjoy afternoon sun. Centrally located in the complex of Coronado. Perfect location: only 150 m to the beach, 5 minutes to Balcon de Europa! Close to supermarkets, bars, restaurants, and pharmacies for your convenience! "
+              img1={apartmentCasaStella}
+              img2={livingroomStella}
+            />
+        </Link>
 
         <HomeData
           className="first-des-reverse"

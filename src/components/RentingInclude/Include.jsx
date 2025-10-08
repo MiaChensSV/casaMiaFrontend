@@ -1,8 +1,12 @@
 import "../RentingInclude/Include.css";
+import { apartmentContent } from "../Data/ApartmentData";
+import { useParams } from "react-router-dom";
 function Include() {
+  const { apartmentId } = useParams();
+  const content = apartmentContent[apartmentId];
   return (
     <div className="price-include-container">
-      <h1>Welcome to rent Casa Mia with the best location Parador</h1>
+      <h1>Welcome to rent {content.title} with the best location Parador</h1>
       <h2>150 meters to the beach and 500 meters to Balcón de Europa</h2>
       <hr className="separate-sections" />
       <ul className="rules">
@@ -40,10 +44,10 @@ function Include() {
             <strong>Requests for quotation!</strong>
           </a>
         </li>
-        <li>No smoking or pets are allowed in Casa Mia.</li>
+        <li>No smoking or pets are allowed in {content.title}.</li>
         <li>
           We are happy to help you with transfers or car rentals for the best
-          transport between the airport and Casa Mia.
+          transport between the airport and {content.title}.
         </li>
       </ul>
     </div>

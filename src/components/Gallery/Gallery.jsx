@@ -2,6 +2,7 @@ import "../Gallery/Gallery.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+
 const Gallery = ({images}) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);

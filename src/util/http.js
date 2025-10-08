@@ -1,11 +1,17 @@
 import axios from "axios";
-const BASE_URL =
-  process.env.REACT_APP_CALENDAR_URL +
-  process.env.REACT_APP_CALENDAR_ID +
-  "/events";
+
 
 // Function to fetch events from the Google Calendar
-const fetchEvents = async () => {
+const fetchEvents = async (calendarId) => {
+   if (!calendarId) {
+    console.error("No calendar ID provided to fetchEvents");
+    return [];
+  }
+  const BASE_URL =
+  process.env.REACT_APP_CALENDAR_URL +
+  calendarId +
+  "/events";
+  
   let allEvents = [];
   let pageToken = null;
   try {

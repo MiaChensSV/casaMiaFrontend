@@ -3,10 +3,13 @@ import HomeHero from "../components/Hero/HomeHero";
 import AboutImg from "../assets/burriana.jpg";
 import Footer from "../components/Footer/Footer";
 import Gallery from "../components/Gallery/Gallery";
-import { allImages } from "../components/Data/ImageData";
 import ScrollToTop from "../util/ScrollToTop";
+import { useParams } from "react-router-dom";
+import { apartmentImages } from "../components/Data/ImageData";
 
 function Photos() {
+  const { apartmentId } = useParams(); // "casa-mia" or "casa-stella"
+  const images = apartmentImages[apartmentId] || [];
   return (
     <>
       <ScrollToTop />
@@ -17,7 +20,7 @@ function Photos() {
         title="Photos"
         btnClass="hide"
       />
-      <Gallery images={allImages} />
+      <Gallery images={images} />
       <Footer />
     </>
   );

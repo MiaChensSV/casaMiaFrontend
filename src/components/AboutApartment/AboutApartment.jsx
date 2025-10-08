@@ -2,10 +2,21 @@ import "../AboutApartment/AboutApartmentStyles.css";
 import doublebed from "../../assets/double-bed.png";
 import singlebed from "../../assets/single-bed.png";
 import aircondition from "../../assets/air-conditioner.png";
+import { apartmentContent } from "../Data/ApartmentData";
+import { useParams } from "react-router-dom";
+
+
 function AboutApartment() {
+  const { apartmentId } = useParams();
+  const content = apartmentContent[apartmentId];
+
+  if (!content) {
+    return <div>Apartment not found</div>;
+  }
+
   return (
     <div className="about-container">
-      <h1>Casa Mia - Parador</h1>
+      <h1>{content.title}</h1>
       <p>
         Fantastic 2 bedroom apartment with communal swimming pool and gardens
         centrally located in the complex of Coronado. The property is situated
@@ -149,11 +160,11 @@ function AboutApartment() {
         <hr className="separate-sections" />
         <h3 className="subtitle-ficha">General</h3>
         <span id="touristicRegistrationNumber">
-          Accommodation Registration Number: VUT/MA/75214
+          Accommodation Registration Number: {content.registration}
         </span>
         <div className="general-items">
           <div className="general-item ">
-            <span>63 m² Property</span>
+            <span> {content.size} m² Property</span>
           </div>
           <div className="general-item ">
             <span>TV</span>

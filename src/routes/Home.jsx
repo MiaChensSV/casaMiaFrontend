@@ -16,9 +16,6 @@ function Home() {
         heroImg={nerja}
         title="Experience the magic of Nerja"
         text="Book with us and discover why it's the Costa del Sol’s best-kept secret."
-        btnClass="show"
-        buttonText="Book now"
-        url="/contact"
       />
       <HomeComponent />
       <Trip />
