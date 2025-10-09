@@ -20,8 +20,8 @@
     color: #2b2b2b;
   }
   ul{
-    padding-top: 2rem;
-  }
+padding-top: 0;           /* ✅ remove that offset */
+  margin: 0;   }
 }
 
 .navbar-logo {
@@ -36,6 +36,10 @@ position: absolute;
   top: 5px;
 }
 
+.mobile-title {
+  display: none;
+}
+
 .fa-react {
   margin-left: 0.2rem;
   font-size: 1.6rem;
@@ -46,9 +50,10 @@ position: absolute;
   grid-template-columns: repeat(6, auto);
   grid-gap: 10px;
   list-style: none;
-  align-items: center;
+  align-items: center;   /* ✅ centers items vertically */
   text-align: center;
   justify-content: end;
+  padding-top: 0;    
 }
 
 .nav-links {
@@ -139,93 +144,134 @@ button:hover {
   color: #fff;
   transition: all 0.2s ease-in-out;
 }
-@media screen and (max-width: 820px) {
-  .NavbarItems {
-    .nav-menu {
-      background-color: #fff;
-      border-radius: 13px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      width: 100vw;
-      height: auto;
-      position: absolute;
-      top: 0px;
-      left: -110%;
-      opacity: 1;
-      transition: all 0.3s ease;
-      align-items: stretch;
-      padding: 60px 0 30px 0;
-      margin: 0;
-    }
-  
-    .nav-menu.active {
-      left: 0;
-      opacity: 1;
-      transition: all 0.3s ease;
-      z-index: -1;
-    }
-  
-    .nav-links {
-      display: block;
-      width: 100%;
-      font-size: 1.2rem;
-      padding: 2rem 0;
-      
-    }
-  
-    .nav-links:hover {
-      background: #01959a;
-      transition: none;
-    }
-  
-    .menu-icons {
-      display: block;
-      position: absolute;
-      top: 25px;
-      right: 30px;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-  
-    .nav-links-mobile {
-      display: block;
-      text-align: center;
-      padding: 1.5rem;
-      margin: auto;
-      border-radius: 4px;
-      width: 80%;
-      background: #01959a;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: 2px;
-      font-size: 1.2rem;
-    }
-    .fa-times {
-      color: #222;
-    }
-  
-    button {
-      display: none;
-    }
-    .dropdown-menu {
-      position: static;
-      box-shadow: none;
-      background-color: transparent;
-    }
-  
-    .dropdown-link {
-      padding: 0;
-      text-align: start;
-    }
-    .nav-links {
-      padding: 0.8rem 0;
-      text-align: start;
-      width: 100%;
-    }
+
+/* 📌 Book Button aligned to the right */
+.nav-book-btn {
+  margin-left: auto;              /* push to far right */
+  display: flex;
+  align-items: center;
+}
+
+.nav-book-btn button {
+  background-color: #008b8b;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.nav-book-btn button:hover {
+  background-color: #006f6f;
+  transform: translateY(-1px);
+}
+
+/* 🟡 Banner Overlay */
+.booking-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;                      /* added bottom to cover entire viewport */
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);     /* subtle blur effect */
+}
+
+/* 🧾 Banner Box */
+.banner-content {
+  background: white;
+  padding: 24px 20px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  animation: bannerPop 0.25s ease;
+}
+
+@keyframes bannerPop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
   }
-  
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.banner-content h3 {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.banner-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.banner-buttons button {
+  flex: 1;
+  padding: 10px;
+  background-color: #008b8b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.banner-buttons button:hover {
+  background-color: #006f6f;
+}
+
+.close-banner {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-banner:hover {
+  color: #000;
+}
+/* 🧭 Center the nav menu when no apartment is selected */
+.nav-menu.nav-center {
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Ensure it's still a grid layout */
+.nav-menu.nav-center {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-gap: 10px;
+  list-style: none;
+  align-items: center;
+  text-align: center;
+}
+.navbar-logo.hidden {
+  display: none;
+}
+
+.mobile-title-container {
+  display: none;
 }
 
 /* @media screen and (min-width: 481px) and (max-width: 820px) {
@@ -255,7 +301,7 @@ button:hover {
     grid-template-columns: repeat(6, auto);
     grid-gap: 10px; /* Adjust the gap to ensure all items fit */
     list-style: none;
-
+    margin-right: 30px; /* 👈 Add space between menu and Book button */
   }
   
   .dropdown-menu {
@@ -288,4 +334,139 @@ button:hover {
       display: none;
     }
   }
+    .nav-menu.nav-center {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
 }
+/* ====== Mobile overrides (must be last) ====== */
+@media screen and (max-width: 820px) {
+
+  .NavbarItems {
+    .nav-menu {
+      background-color: #fff;
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;       /* ✅ vertical layout */
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100vw;
+      height: 100vh;                /* ✅ take full screen height */
+      position: fixed;              /* ✅ fixed overlay */
+      top: 0;
+      left: -110%;                  /* ✅ hidden by default */
+      opacity: 0;
+      transition: all 0.3s ease;
+      padding: 80px 20px 30px 20px;  /* space for top bar */
+      z-index: 10000;               /* ✅ bring above everything */
+      overflow-y: auto;
+    }
+
+    .nav-menu.active {
+      left: 0;
+      opacity: 1;
+      z-index: 10000;               /* ✅ ensure overlay is above */
+      transition: all 0.3s ease;
+    }
+
+    .nav-links {
+      display: block;
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid #eee; /* nice separation */
+    }
+
+    .nav-links:hover {
+      background: #01959a;
+      color: #fff;
+      transition: none;
+    }
+
+    .menu-icons {
+      display: block;
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 10001;              /* ✅ above the menu */
+    }
+
+
+
+    .dropdown-menu {
+      position: static;
+      box-shadow: none;
+      background-color: transparent;
+    }
+
+    .dropdown-link {
+      padding: 0;
+      text-align: start;
+    }
+
+    .nav-links {
+      text-align: start;
+      width: 100%;
+    }
+    .navbar-logo {
+    display: none;
+    }
+
+   .mobile-title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;            /* space between title and button */
+    z-index: 10002;
+  }
+
+  .mobile-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .mobile-book-btn {
+    background-color: #008b8b;
+    color: white;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+    .mobile-book-btn:hover {
+    background-color: #006f6f;
+  }
+
+  .menu-icons {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10003;
+  }
+  .nav-book-btn {
+    display: none; /* hide original Book button on mobile */
+  }
+  }
+}
+
+
+
