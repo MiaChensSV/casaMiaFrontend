@@ -40,14 +40,24 @@ function App() {
           <Route path="/:apartmentId/apartment" element={<Apartment />} />
           <Route path="/:apartmentId/price" element={<AvailabilityAndPrice />} />
           <Route path="/:apartmentId/photos" element={<Pictures />} />
+          <Route path="/:apartmentId/contact" element={<Contact />} />
+          <Route path="/casa-mia/activities" element={<Activities />} />
+          <Route path="/casa-mia/excursions" element={<Excursions />} />
+          <Route path="/casa-mia/restaurants" element={<Restaurants />} />
+          <Route path="/casa-mia/beaches" element={<NerjaBeaches />} />
+          <Route path="/casa-mia/nerja" element={<Nerja />} />
 
-          {/* ✅ Keep existing general routes */}
-          <Route path="/nerja" element={<Nerja />} />
-          <Route path="/beaches" element={<NerjaBeaches />} />
+          <Route path="/casa-stella/activities" element={<Activities />} />
+          <Route path="/casa-stella/excursions" element={<Excursions />} />
+          <Route path="/casa-stella/restaurants" element={<Restaurants />} />
+          <Route path="/casa-stella/beaches" element={<NerjaBeaches />} />
+          <Route path="/casa-stella/nerja" element={<Nerja />} />
           <Route path="/activities" element={<Activities />} />
-          <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/excursions" element={<Excursions />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/beaches" element={<NerjaBeaches />} />
+          <Route path="/nerja" element={<Nerja />} />
+
         </Routes>
       </div>
   );

@@ -7,16 +7,23 @@ function NavbarWrapper() {
   const location = useLocation();
   const isCasaMia = location.pathname.startsWith("/casa-mia");
   const isCasaStella = location.pathname.startsWith("/casa-stella");
-  const apartmentSelected = isCasaMia || isCasaStella;
   const pathRoot = location.pathname.split("/")[1];
   
+   // 📝 Remember selected apartment in localStorage
+  React.useEffect(() => {
+    if (isCasaMia) {
+      localStorage.setItem("selectedApartment", "casa-mia");
+    } else if (isCasaStella) {
+      localStorage.setItem("selectedApartment", "casa-stella");
+    }
+  }, [pathRoot,isCasaMia,isCasaStella]);
+
   return (
-      <Navbar
-        location={location}
-        pathRoot={pathRoot}
-        apartmentSelected={apartmentSelected}
-      />
-    );
+    <Navbar
+      location={location}
+      pathRoot={pathRoot}
+    />
+  );
 }
 
 class Navbar extends Component {
@@ -26,34 +33,53 @@ class Navbar extends Component {
   };
 
   render() {
-    const { pathRoot, apartmentSelected } = this.props;
+    const { pathRoot } = this.props;
+
+    // 🧠 Load stored apartment if not currently on /casa-mia or /casa-stella
+    const storedApartment = localStorage.getItem("selectedApartment");
+    const effectiveRoot =
+      pathRoot === "casa-mia" || pathRoot === "casa-stella"
+        ? pathRoot
+        : storedApartment;
+
     // Determine apartment from URL root (e.g. "casa-mia" or "casa-stella")
     
     const isApartmentRoot = pathRoot === "casa-mia" || pathRoot === "casa-stella";
-    const basePath = isApartmentRoot ? `/${pathRoot}` : "";
+    let basePath = isApartmentRoot ? `/${pathRoot}` : "";
 
+    // Determine if this is a shared Nerja route
+    const sharedPages = ["/activities", "/excursions", "/restaurants", "/beaches"];
+    const isSharedPage = sharedPages.some((p) => this.props.location.pathname.startsWith(p));
+// If on shared page but have stored apartment, use that as basePath
+if (!isApartmentRoot && isSharedPage && storedApartment) {
+  basePath = `/${storedApartment}`;
+}
+
+// Build the menu based on either current or stored apartment
+const menu =
+  isApartmentRoot || (storedApartment && isSharedPage)
+    ? getMenuItems("apartment")
+    : getMenuItems("home");
+      
      // Determine the logo text dynamically
-    let logoText = ""; // default
+    let logoText = "";
+    if (pathRoot === "casa-mia") logoText = "Casa Mia";
     if (pathRoot === "casa-stella") logoText = "Casa Stella";
-
-    const menu = apartmentSelected
-      ? getMenuItems("apartment")
-      : getMenuItems("home");
 
     return (
       <nav className="NavbarItems">
-         <Link
-            className="navbar-logo"
-            to={
-              pathRoot === "casa-mia"
-                ? "/casa-mia/apartment"
-                : pathRoot === "casa-stella"
-                ? "/casa-stella/apartment"
-                : "/"
-            }
-          >
-            {logoText}
-          </Link>
+          <Link
+          className="navbar-logo"
+          to={
+            effectiveRoot === "casa-mia"
+              ? "/casa-mia/apartment"
+              : effectiveRoot === "casa-stella"
+              ? "/casa-stella/apartment"
+              : "/"
+          }
+        >
+          {logoText}
+        </Link>
         <div className="menu-icons" onClick={this.handleClick}>
           <i
             className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}
@@ -62,11 +88,23 @@ class Navbar extends Component {
 
         <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
           {menu.map((item, index) => {
-             // For Apartment / Price / Photos, prepend basePath if inside casa-mia or casa-stella
             let targetUrl = item.url;
-            if (isApartmentRoot && ["/apartment", "/price", "/photos"].includes(item.url)) {
-              targetUrl = `${basePath}${item.url}`; // e.g. /casa-mia/apartment
-            }
+            if (
+                  (isApartmentRoot || (storedApartment && isSharedPage)) &&
+                  [
+                    "/apartment",
+                    "/price",
+                    "/photos",
+                    "/contact",
+                    "/activities",
+                    "/excursions",
+                    "/restaurants",
+                    "/beaches",
+                  ].includes(item.url)
+                ) {
+                  targetUrl = `${basePath}${item.url}`;
+                }
+
             if (item.dropdown) {
               // Normal menu items
               return (

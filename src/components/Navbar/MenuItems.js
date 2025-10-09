@@ -37,15 +37,23 @@ export const getMenuItems = (mode = "home") => {
       },
       {
         title: "Contact",
-        url: "/contact",
         cName: "nav-links",
-        icon: "fa-solid fa-address-book",
+        icon: "fa-solid fa-image",
+        dropdown: [
+          { title: "Casa Mia",    url: "/casa-mia/contact",    cName: "dropdown-link" },
+          { title: "Casa Stella", url: "/casa-stella/contact", cName: "dropdown-link" },
+        ],
       },
       {
         title: "Nerja",
-        url: "/nerja",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
+        dropdown: [
+          { title: "Activities", url: "/activities", cName: "dropdown-link" },
+          { title: "Excursions", url: "/excursions", cName: "dropdown-link" },
+          { title: "Restaurants", url: "/restaurants", cName: "dropdown-link" },
+          { title: "Beaches", url:"/beaches", cName: "dropdown-link"}
+        ],
       },
     ];
   }
@@ -60,7 +68,7 @@ export const getMenuItems = (mode = "home") => {
     },
     {
       title: "Apartment",
-      url: "/apartment", // Navbar will prefix /casa-xxx automatically
+      url: "/apartment",
       cName: "nav-links",
       icon: "fa-solid fa-circle-info",
     },
@@ -84,9 +92,14 @@ export const getMenuItems = (mode = "home") => {
     },
     {
       title: "Nerja",
-      url: "/nerja",
       cName: "nav-links",
       icon: "fa-solid fa-circle-info",
+      dropdown: [
+        { title: "Activities", url: "/activities", cName: "dropdown-link" },
+        { title: "Excursions", url: "/excursions", cName: "dropdown-link" },
+        { title: "Restaurants", url: "/restaurants", cName: "dropdown-link" },
+        { title: "Beaches", url:"/beaches", cName: "dropdown-link"}
+      ],
     },
   ];
 };

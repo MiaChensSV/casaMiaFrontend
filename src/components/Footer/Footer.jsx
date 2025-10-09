@@ -26,7 +26,6 @@ const Footer = () => {
       <div className="footer">
         <div className="top">
           <div>
-             {isDefault ? (
             <h1 className="footer-logo-multi">
               <a href="/casa-mia/apartment" className="footer-link">
                 Casa Mia
@@ -36,13 +35,6 @@ const Footer = () => {
                 Casa Stella
               </a>
             </h1>
-          ) : (
-            <h1>
-              <a className="footer-logo" href={`${basePath}/apartment`}>
-                {apartmentName}
-              </a>
-            </h1>
-          )}
           </div>
           <div>
             {/* should the number be hidden? */}

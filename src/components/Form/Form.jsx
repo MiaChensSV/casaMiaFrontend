@@ -12,6 +12,7 @@ import adjustEventEndDate from "../../util/AdjustEndDate";
 import { useAppSelector } from "../../store";
 import { isBefore, isSameDay, startOfDay, isWithinInterval } from "date-fns";
 import loading from "../../assets/loading.gif";
+import { useParams } from "react-router-dom";
 
 const ContactForm = () => {
   const [fullName, setFullName] = useState("");
@@ -28,7 +29,21 @@ const ContactForm = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const { apartmentId } = useParams();
 
+  const calendarId =
+    apartmentId === "casa-stella"
+      ? process.env.REACT_APP_CALENDAR_ID_CASA_STELLA
+      : apartmentId === "casa-mia"
+      ? process.env.REACT_APP_CALENDAR_ID_CASA_MIA
+      : null;
+
+  const apartmentName =
+    apartmentId === "casa-mia"
+      ? "Casa Mia"
+      : apartmentId === "casa-stella"
+      ? "Casa Stella"
+      : "";
 
   const [getDayClass, setGetDayClass] = useState(() => () => "");
   const [isDayBlocked, setIsDayBlocked] = useState(() => () => false);
@@ -36,8 +51,11 @@ const ContactForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!calendarId) {
+    console.error("No calendar ID provided to fetchEvents");
+    }
     if (bookedDateRanges == null) {
-      fetchEvents().then((result) => {
+      fetchEvents(calendarId).then((result) => {
         const adjustedEvents = result.map(adjustEventEndDate);
         dispatch(setCalendarEvent(adjustedEvents));
       });
@@ -81,7 +99,7 @@ const ContactForm = () => {
       setIsDayBlocked(() => isDayBlockedFunc);
       setGetDayClass(() => getDayClassFunc);
     }
-  }, [bookedDateRanges, dispatch]);
+  }, [bookedDateRanges, calendarId, dispatch]);
 
   // Get today's date in YYYY-MM-DD format
   const today = new Date().toISOString().split("T")[0];
@@ -213,7 +231,7 @@ const ContactForm = () => {
     <>
       {!isSubmitted ? (
         <>
-          <h1>Send a message to us!</h1>
+          <h1>  Send a message to us{apartmentName ? ` about ${apartmentName}` : ""}!</h1>
           <form onSubmit={handleSubmit} className="contact-form">
             <div className="two-column">
               <div className="inputValue">
