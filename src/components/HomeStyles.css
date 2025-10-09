@@ -56,24 +56,47 @@
   right: 0;
 }
 
-/* Remove default link styling */
 .clickable-apartment {
   text-decoration: none;
   color: inherit;
   display: block;
+}
+
+.clickable-apartment .image {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* On hover — add subtle lift effect */
-.clickable-apartment:hover {
+.clickable-apartment:hover .image {
   transform: scale(1.02);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Optional: slightly dim images on hover for feedback */
-.clickable-apartment:hover img {
+.clickable-apartment:hover .image img {
   filter: brightness(0.9);
   transition: filter 0.3s ease;
+}
+
+.des-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.more-btn {
+  align-self: flex-end;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #007b8f;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.more-btn:hover {
+  color: #005f6b;
+  background: none;
+  border: none;
 }
 
 @media screen and (max-width: 480px) {
