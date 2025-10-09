@@ -10,6 +10,13 @@ import { apartmentImages } from "../components/Data/ImageData";
 function Photos() {
   const { apartmentId } = useParams(); // "casa-mia" or "casa-stella"
   const images = apartmentImages[apartmentId] || [];
+
+  const bannerName =
+    apartmentId === "casa-mia"
+      ? "Casa Mia Photos"
+      : apartmentId === "casa-stella"
+      ? "Casa Stella Photos"
+      : "Photos";
   return (
     <>
       <ScrollToTop />
@@ -17,7 +24,7 @@ function Photos() {
       <HomeHero
         cName="hero-mid"
         heroImg={AboutImg}
-        title="Photos"
+        title={bannerName}
         btnClass="hide"
       />
       <Gallery images={images} />

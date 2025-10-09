@@ -9,6 +9,8 @@ import mia_kitchen from "../../assets/casa-mia/kitchen.jpg";
 import mia_livingRoom from "../../assets/casa-mia/livingroom.jpg";
 import mia_pool1 from "../../assets/pool-1.jpg";
 import mia_pool2 from "../../assets/pool2.jpg";
+import mia_bedroom3 from "../../assets/casa-mia/view-from-bedroom1.jpg";
+
 // Casa Stella images
 import stella_balcony2 from "../../assets/casa-stella/balcony2.jpg";
 import stella_balcony1 from "../../assets/casa-stella/balcony1.jpg";
@@ -52,6 +54,7 @@ const casaMiaImages = [
   mia_bedroom11,
   mia_bedroom2,
   mia_bedroom22,
+  mia_bedroom3,
   mia_livingRoom,
   mia_bathroom,
 ];
@@ -98,6 +101,10 @@ const casaStellaImages = [
   stella_secondBedroom1,
   stella_secondBedroom2,
   stella_secondBedroom3,
+
+  //pool
+  mia_pool1,
+  mia_pool2,
 ];
 
 
