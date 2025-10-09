@@ -45,6 +45,13 @@ const ContactForm = () => {
       ? "Casa Stella"
       : "";
 
+  const emailAddress  =
+    apartmentId === "casa-mia"
+      ? "casamiaguests@gmail.com"
+      : apartmentId === "casa-stella"
+      ? "casastelaguests@gmail.com"
+      : "";
+
   const [getDayClass, setGetDayClass] = useState(() => () => "");
   const [isDayBlocked, setIsDayBlocked] = useState(() => () => false);
   const bookedDateRanges = useAppSelector((state) => state.calendar.events);
@@ -62,8 +69,14 @@ const ContactForm = () => {
   }, [calendarId, dispatch]);
 
   useEffect(() => {
-  if (!bookedDateRanges) return;
+  if (apartmentName) {
+    setMessage(`Hi, I'm interested in booking ${apartmentName}.`);
+  }
+}, [apartmentName]);
 
+  useEffect(() => {
+  if (!bookedDateRanges) return;
+  
   const eventRanges = bookedDateRanges.map((range) => ({
     start: startOfDay(new Date(range.startDate)),
     end: startOfDay(new Date(range.endDate)),
@@ -206,6 +219,7 @@ const ContactForm = () => {
           totalChildren,
           childrenAges,
           message,
+          apartment: apartmentName,
         })
         .then((response) => {
           if(response.status === 200){
@@ -394,12 +408,12 @@ const ContactForm = () => {
         </div>
       ) : showSuccessMessage ? (
         <div className="success-message">
-          <p>Email sent successfully!</p>
+          <p>Email {apartmentName} sent successfully!</p>
           <p>We will get back to you as soon as possible.</p>
         </div>
       ) : isError ? (
         <div className="retry-message">
-          <p>Something went wrong. Please try again or send us email to casamiaguests@gmail.com.</p>
+          <p>Something went wrong. Please try again or send us email to {emailAddress}.</p>
         </div>
       ) : null}
     </>
