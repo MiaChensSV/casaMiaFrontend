@@ -28,7 +28,7 @@ const Availability = ({ defaultMonthsShown = 1 }) => {
 
   useEffect(() => {
     if (bookedDateRanges == null) {
-      fetchEvents().then((result) => {
+      fetchEvents(calendarId).then((result) => {
         const adjustedEvents = result.map(adjustEventEndDate);
         dispatch(setCalendarEvent(adjustedEvents));
       });

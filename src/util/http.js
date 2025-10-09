@@ -11,14 +11,18 @@ const fetchEvents = async (calendarId) => {
   process.env.REACT_APP_CALENDAR_URL +
   calendarId +
   "/events";
-  
+
+  const apiKey = calendarId.includes("casastella")
+  ? process.env.REACT_APP_API_KEY_CASA_STELLA
+  : process.env.REACT_APP_API_KEY_CASA_MIA;
+
   let allEvents = [];
   let pageToken = null;
   try {
     do {
       const response = await axios.get(BASE_URL, {
         params: {
-          key: process.env.REACT_APP_API_KEY,
+          key: apiKey,
           timeMin: new Date().toISOString(),
           singleEvents: true,
           orderBy: "startTime",
@@ -31,6 +35,8 @@ const fetchEvents = async (calendarId) => {
         endDate: event.end.dateTime || event.end.date,
         summary: event.summary,
       }));
+            console.log("📅 Mapped events:", events);
+
       allEvents = allEvents.concat(events);
       // Update the pageToken to get the next page of results
       pageToken = response.data.nextPageToken;
