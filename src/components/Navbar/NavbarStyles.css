@@ -416,18 +416,57 @@ button:hover {
       z-index: 10001;              /* ✅ above the menu */
     }
 
+/* ✅ Top-level menu items span the full viewport width */
+.nav-links,
+.dropdown > span {
+  display: block;
+  width: 100vw;                  /* 👈 span full viewport */
+  margin-left: -20px;            /* 👈 cancel container padding */
+  font-size: 1.2rem;
+  padding: 1.2rem 20px;
+  border-bottom: 1px solid #eee;
+  background-color: #fff;
+  box-sizing: border-box;        /* ensure padding doesn't overflow */
+}
+
+.nav-links:hover,
+.dropdown > span:hover {
+  background: #01959a;
+  color: #fff;
+}
 
 
-    .dropdown-menu {
-      position: static;
-      box-shadow: none;
-      background-color: transparent;
-    }
+   /* ✅ Submenu also takes full width */
+.dropdown-menu {
+  display: none;
+  width: 100vw;                  /* 👈 full viewport */
+  margin-left: -20px;            /* 👈 align with edges */
+  background-color: #f9f9f9;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    .dropdown-link {
-      padding: 0;
-      text-align: start;
-    }
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-link {
+  display: block;
+  width: 100vw;                  /* 👈 full viewport */
+  padding: 1rem 30px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  color: #222;
+  font-size: 1rem;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.dropdown-link:hover {
+  background-color: #01959a;
+  color: #fff;
+}
+
 
     .nav-links {
       text-align: start;
