@@ -84,11 +84,16 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .apartment-carousel {
-    padding: 0 10px;
-  }
+width: 100%;
+  overflow: hidden;  }
 
   .apartment-carousel .carousel-item img {
     height: 160px;     /* slightly smaller images on mobile */
     border-radius: 6px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
   }
 }

@@ -103,31 +103,31 @@ const { apartmentId } = useParams();
 
        {/* 🖼️ Gallery Section */}
      {galleryImages.length > 0 && (
-  <section className="apartment-carousel">
-    <Slider
-      dots={true}
-      infinite={true}
-      speed={500}
-      slidesToShow={4}
-      slidesToScroll={1}
-      autoplay={true}              // ✅ enable autoplay
-      autoplaySpeed={3000}         // ✅ interval between slides (ms)
-      pauseOnHover={true}          // optional: pause if user hovers
-      responsive={[
-        {
-          breakpoint: 1024,
-          settings: { slidesToShow: 3 }
-        },
-        {
-          breakpoint: 768,
-          settings: { slidesToShow: 2 }
-        },
-        {
-          breakpoint: 480,
-          settings: { slidesToShow: 1 }
-        }
-      ]}
-    >
+    <section className="apartment-carousel">
+      <Slider
+        dots={true}
+        infinite={true}
+        speed={500}
+        slidesToShow={4}
+        slidesToScroll={1}
+        autoplay={true}              // ✅ enable autoplay
+        autoplaySpeed={2000}         // ✅ interval between slides (ms)
+        pauseOnHover={true}          // optional: pause if user hovers
+        responsive={[
+          {
+            breakpoint: 1024,
+            settings: { slidesToShow: 3 }
+          },
+          {
+            breakpoint: 768,
+            settings: { slidesToShow: 2 }
+          },
+          {
+            breakpoint: 480,
+            settings: { slidesToShow: 1 }
+          }
+        ]}
+      >
       {galleryImages.map((img, index) => (
         <div key={index} className="carousel-item">
           <img src={img} alt={`${apartmentName} ${index + 1}`} />
