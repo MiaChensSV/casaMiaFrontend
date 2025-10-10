@@ -162,10 +162,21 @@ class Navbar extends Component {
                 // Normal menu items
                 return (
                   <li key={index} className="nav-item dropdown">
-                    <span className={`${item.cName} ${parentActive ? "active" : ""}`}>
-                      <i className={item.icon}></i>
-                      {item.title}
-                    </span>
+                    {item.url ? (
+                      <Link
+                        to={targetUrl}
+                        className={`${item.cName} ${parentActive ? "active" : ""}`}
+                        onClick={() => this.setState({ clicked: false })}
+                      >
+                        <i className={item.icon}></i>
+                        {item.title}
+                      </Link>
+                    ) : (
+                      <span className={`${item.cName} ${parentActive ? "active" : ""}`}>
+                        <i className={item.icon}></i>
+                        {item.title}
+                      </span>
+                    )}
                   <ul className="dropdown-menu">
                     {item.dropdown.map((subItem, subIndex) => {
                      const subActive = isActivePath(subItem.url);

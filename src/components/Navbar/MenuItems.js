@@ -48,6 +48,7 @@ export const getMenuItems = (mode = "home") => {
         title: "Nerja",
         cName: "nav-links",
         icon: "fa-solid fa-circle-info",
+        url: "/nerja",
         dropdown: [
           { title: "Activities", url: "/activities", cName: "dropdown-link" },
           { title: "Excursions", url: "/excursions", cName: "dropdown-link" },
@@ -94,6 +95,7 @@ export const getMenuItems = (mode = "home") => {
       title: "Nerja",
       cName: "nav-links",
       icon: "fa-solid fa-circle-info",
+      url: "/nerja",
       dropdown: [
         { title: "Activities", url: "/activities", cName: "dropdown-link" },
         { title: "Excursions", url: "/excursions", cName: "dropdown-link" },
