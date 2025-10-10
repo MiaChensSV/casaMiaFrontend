@@ -147,7 +147,7 @@ class Navbar extends Component {
                     <ul className="dropdown-menu">
                       {item.dropdown.map((subItem, subIndex) => (
                         <li key={subIndex}>
-                          <Link className={subItem.cName} to={subItem.url}>
+                          <Link className={subItem.cName} to={subItem.url} onClick={() => this.setState({ clicked: false })} >
                             {subItem.title}
                           </Link>
                         </li>
@@ -159,7 +159,7 @@ class Navbar extends Component {
 
               return (
                 <li key={index}>
-                  <Link className={item.cName} to={targetUrl}>
+                  <Link className={item.cName} to={targetUrl} onClick={() => this.setState({ clicked: false })} >
                     <i className={item.icon}></i>
                     {item.title}
                   </Link>
