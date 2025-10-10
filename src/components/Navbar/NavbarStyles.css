@@ -274,6 +274,19 @@ button:hover {
   display: none;
 }
 
+ .nav-links.active,
+  .dropdown > span.active,
+  .dropdown-link.active {
+    background-color: #01959a;
+    color: #fff;
+    border-radius: 4px;
+  }
+
+  .nav-links.active i,
+  .dropdown-link.active i {
+    color: #fff;
+  }
+
 /* @media screen and (min-width: 481px) and (max-width: 820px) {
   .dropdown-menu {
     position: static;
@@ -351,6 +364,20 @@ button:hover {
     align-items: center;
     text-align: center;
   }
+  .nav-links.active,
+  .dropdown > span.active,
+  .dropdown-link.active {
+    background-color: #01959a;
+    color: #fff !important;
+  }
+
+  /* ✅ Ensure icon and text inside active menu item are visible */
+  .nav-links.active i,
+  .dropdown > span.active i,
+  .dropdown-link.active i {
+    color: #fff !important;
+  }
+
 }
 /* ====== Mobile overrides (must be last) ====== */
 @media screen and (max-width: 820px) {
@@ -416,56 +443,56 @@ button:hover {
       z-index: 10001;              /* ✅ above the menu */
     }
 
-/* ✅ Top-level menu items span the full viewport width */
-.nav-links,
-.dropdown > span {
-  display: block;
-  width: 100vw;                  /* 👈 span full viewport */
-  margin-left: -20px;            /* 👈 cancel container padding */
-  font-size: 1.2rem;
-  padding: 1.2rem 20px;
-  border-bottom: 1px solid #eee;
-  background-color: #fff;
-  box-sizing: border-box;        /* ensure padding doesn't overflow */
-}
+  /* ✅ Top-level menu items span the full viewport width */
+  .nav-links,
+  .dropdown > span {
+    display: block;
+    width: 100vw;                  /* 👈 span full viewport */
+    margin-left: -20px;            /* 👈 cancel container padding */
+    font-size: 1.2rem;
+    padding: 1.2rem 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #fff;
+    box-sizing: border-box;        /* ensure padding doesn't overflow */
+  }
 
-.nav-links:hover,
-.dropdown > span:hover {
-  background: #01959a;
-  color: #fff;
-}
+  .nav-links:hover,
+  .dropdown > span:hover {
+    background: #01959a;
+    color: #fff;
+  }
 
 
-   /* ✅ Submenu also takes full width */
-.dropdown-menu {
-  display: none;
-  width: 100vw;                  /* 👈 full viewport */
-  margin-left: -20px;            /* 👈 align with edges */
-  background-color: #f9f9f9;
-  padding: 0;
-  box-sizing: border-box;
-}
+    /* ✅ Submenu also takes full width */
+  .dropdown-menu {
+    display: none;
+    width: 100vw;                  /* 👈 full viewport */
+    margin-left: -20px;            /* 👈 align with edges */
+    background-color: #f9f9f9;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 
-.dropdown-link {
-  display: block;
-  width: 100vw;                  /* 👈 full viewport */
-  padding: 1rem 30px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #eee;
-  color: #222;
-  font-size: 1rem;
-  text-align: left;
-  box-sizing: border-box;
-}
+  .dropdown-link {
+    display: block;
+    width: 100vw;                  /* 👈 full viewport */
+    padding: 1rem 30px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    color: #222;
+    font-size: 1rem;
+    text-align: left;
+    box-sizing: border-box;
+  }
 
-.dropdown-link:hover {
-  background-color: #01959a;
-  color: #fff;
-}
+  .dropdown-link:hover {
+    background-color: #01959a;
+    color: #fff;
+  }
 
 
     .nav-links {
@@ -524,6 +551,49 @@ button:hover {
   .nav-book-btn {
     display: none; /* hide original Book button on mobile */
   }
+  .nav-links.active,
+    .dropdown > span.active,
+    .dropdown-link.active {
+      display: block;
+      width: 100vw;
+      margin-left: -20px;
+      background-color: #01959a;
+      color: #fff !important;
+      box-sizing: border-box;
+      padding: 1.2rem 20px;    /* 👈 balanced padding */
+      border-radius: 0;
+    }
+
+    .nav-links.active i,
+    .dropdown > span.active i,
+    .dropdown-link.active i {
+      color: #fff !important;
+    }
+    /* ✅ Hover state full width */
+  .nav-links:hover,
+    .dropdown > span:hover,
+    .dropdown-link:hover {
+      display: block;
+      width: 100vw;
+      margin-left: -20px;
+      background-color: #01959a;
+      color: #fff !important;
+      box-sizing: border-box;
+      padding: 1.2rem 20px;    /* 👈 same as active */
+      border-radius: 0;
+    }
+    .nav-links:hover i,
+    .dropdown > span:hover i,
+    .dropdown-link:hover i {
+      color: #fff !important;
+    }
+
+      .dropdown-menu .dropdown-link,
+    .dropdown-menu .dropdown-link:hover,
+    .dropdown-menu .dropdown-link.active {
+      padding-left: 40px;      /* 👈 indent submenu text */
+      padding-right: 20px;
+    }
   }
 }
 

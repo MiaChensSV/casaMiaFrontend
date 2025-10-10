@@ -34,6 +34,8 @@ function NavbarWrapper() {
   );
 }
 
+
+
 class Navbar extends Component {
   state = { clicked: false, showBookingBanner: false };
   handleClick = () => {
@@ -53,13 +55,18 @@ class Navbar extends Component {
   };
   render() {
     const { pathRoot } = this.props;
+    const pathname = this.props.location.pathname;
 
+    // exact for "/", prefix for others (with trailing-slash normalization)
+    const isActivePath = (href) => {
+      if (!href) return false;
+      const a = href.replace(/\/+$/, "");        // "/casa-mia/price/" -> "/casa-mia/price"
+      const p = pathname.replace(/\/+$/, "");
+      if (a === "" || a === "/") return p === "/";        // ✅ Home must be exactly "/"
+      return p === a || p.startsWith(a + "/");            // ✅ section + children
+    };
     // 🧠 Load stored apartment if not currently on /casa-mia or /casa-stella
     const storedApartment = localStorage.getItem("selectedApartment");
-    const effectiveRoot =
-      pathRoot === "casa-mia" || pathRoot === "casa-stella"
-        ? pathRoot
-        : storedApartment;
 
     // Determine apartment from URL root (e.g. "casa-mia" or "casa-stella")
     
@@ -82,26 +89,37 @@ class Navbar extends Component {
       
      // Determine the logo text dynamically
     let logoText = "";
-    if (pathRoot === "casa-mia") logoText = "Casa Mia";
-    if (pathRoot === "casa-stella") logoText = "Casa Stella";
+    if (pathRoot === "casa-mia") {
+        logoText = "Casa Mia";
+      } else if (pathRoot === "casa-stella") {
+        logoText = "Casa Stella";
+      } else {
+        // 👇 Show both when no apartment selected
+        logoText = (
+          <>
+            <Link to="/casa-mia/apartment" className="nav-apartment-link">
+              Casa Mia
+            </Link>
+            {" | "}
+            <Link to="/casa-stella/apartment" className="nav-apartment-link">
+              Casa Stella
+            </Link>
+          </>
+        );
+  }
 
     const showBookButton = true;
 
     return (
       <>
         <nav className="NavbarItems">
-            <Link
-            className={`navbar-logo ${showBookButton ? "hidden" : ""}`}
-            to={
-              effectiveRoot === "casa-mia"
-                ? "/casa-mia/apartment"
-                : effectiveRoot === "casa-stella"
-                ? "/casa-stella/apartment"
-                : "/"
-            }
-          >
-            {logoText}
-          </Link>
+            <div className={`navbar-logo ${showBookButton ? "hidden" : ""}`}>
+              <Link to="/casa-mia/apartment" className="nav-apartment-link">Casa Mia</Link>
+              {" | "}
+              <Link to="/casa-stella/apartment" className="nav-apartment-link">Casa Stella</Link>
+            </div>
+
+
           <div className="menu-icons" onClick={this.handleClick}>
             <i
               className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}
@@ -136,22 +154,33 @@ class Navbar extends Component {
                     targetUrl = `${basePath}${item.url}`;
                   }
 
+              const activeSelf = isActivePath(targetUrl);
+
               if (item.dropdown) {
+                const parentActive = activeSelf || item.dropdown.some((si) => isActivePath(si.url));
+
                 // Normal menu items
                 return (
                   <li key={index} className="nav-item dropdown">
-                    <span className={item.cName}>
+                    <span className={`${item.cName} ${parentActive ? "active" : ""}`}>
                       <i className={item.icon}></i>
                       {item.title}
                     </span>
-                    <ul className="dropdown-menu">
-                      {item.dropdown.map((subItem, subIndex) => (
+                  <ul className="dropdown-menu">
+                    {item.dropdown.map((subItem, subIndex) => {
+                     const subActive = isActivePath(subItem.url);
+                      return (
                         <li key={subIndex}>
-                          <Link className={subItem.cName} to={subItem.url} onClick={() => this.setState({ clicked: false })} >
+                          <Link
+                            className={`${subItem.cName} ${subActive ? "active" : ""}`}
+                            to={subItem.url}
+                            onClick={() => this.setState({ clicked: false })}
+                          >
                             {subItem.title}
                           </Link>
                         </li>
-                      ))}
+                      );
+                    })}
                     </ul>
                   </li>
                 );
@@ -159,13 +188,17 @@ class Navbar extends Component {
 
               return (
                 <li key={index}>
-                  <Link className={item.cName} to={targetUrl} onClick={() => this.setState({ clicked: false })} >
+                  <Link
+                    className={`${item.cName} ${activeSelf ? "active" : ""}`}
+                    to={targetUrl}
+                    onClick={() => this.setState({ clicked: false })}
+                  >
                     <i className={item.icon}></i>
                     {item.title}
                   </Link>
                 </li>
               );
-            })}
+})}
           </ul>
           {/* 📌 Book Button — only shows if no apartment selected */}
               {showBookButton && (
