@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 import { Link, useLocation , useNavigate  } from "react-router-dom";
 import { getMenuItems } from "./MenuItems";
+import { Helmet } from "react-helmet-async";
 import "./NavbarStyles.css";
 
 function NavbarWrapper() {
   const location = useLocation();
   const navigate = useNavigate();
+  const path = location.pathname;
+
   const isCasaMia = location.pathname.startsWith("/casa-mia");
   const isCasaStella = location.pathname.startsWith("/casa-stella");
   const pathRoot = location.pathname.split("/")[1];
-  
+
+  let title = "Vacation Nerja";
+
+  if (path.startsWith("/casa-mia")) {
+    title = "Casa Mia | Vacation Nerja";
+  } else if (path.startsWith("/casa-stella")) {
+    title = "Casa Stella | Vacation Nerja";
+  } else if (path === "/" || path === "") {
+    title = "Casa Mia | Casa Stella | Vacation Nerja";
+  } 
+
    // 📝 Remember selected apartment in localStorage
   React.useEffect(() => {
     if (isCasaMia) {
@@ -26,11 +39,17 @@ function NavbarWrapper() {
   }, [location.pathname]);
 
   return (
-    <Navbar
-      location={location}
-      pathRoot={pathRoot}
-      navigate={navigate} 
-    />
+    <>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={`${title} - Book your stay in Nerja.`} />
+      </Helmet>
+      <Navbar
+        location={location}
+        pathRoot={pathRoot}
+        navigate={navigate} 
+      />
+    </>
   );
 }
 
