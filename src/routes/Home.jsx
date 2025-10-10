@@ -1,16 +1,12 @@
-import Navbar from "../components/Navbar/Navbar";
 import HomeHero from "../components/Hero/HomeHero";
 import HomeComponent from "../components/HomeComponent";
 import Footer from "../components/Footer/Footer";
 import Trip from "../components/WhatToDo/Trip";
 import nerja from "../assets/balconyDeEuropa.jpg";
-import ScrollToTop from "../util/ScrollToTop";
 
 function Home() {
   return (
     <>
-      <ScrollToTop />
-      <Navbar />
       <HomeHero
         cName="hero"
         heroImg={nerja}

@@ -12,6 +12,7 @@ import Activities from "./routes/Activities";
 import Restaurants from "./routes/Restaurants";
 import Excursions from "./routes/Excursions";
 import Navbar from "./components/Navbar/Navbar";
+import ScrollToTop from "./util/ScrollToTop"
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
     // </div>
 
       <div className="App">
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

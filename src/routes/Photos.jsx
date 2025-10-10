@@ -1,9 +1,7 @@
-import Navbar from "../components/Navbar/Navbar";
 import HomeHero from "../components/Hero/HomeHero";
 import AboutImg from "../assets/burriana.jpg";
 import Footer from "../components/Footer/Footer";
 import Gallery from "../components/Gallery/Gallery";
-import ScrollToTop from "../util/ScrollToTop";
 import { useParams } from "react-router-dom";
 import { apartmentImages } from "../components/Data/ImageData";
 
@@ -19,8 +17,6 @@ function Photos() {
       : "Photos";
   return (
     <>
-      <ScrollToTop />
-      <Navbar />
       <HomeHero
         cName="hero-mid"
         heroImg={AboutImg}

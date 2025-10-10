@@ -1,8 +1,6 @@
-import Navbar from "../components/Navbar/Navbar";
 import HomeHero from "../components/Hero/HomeHero";
 import Nerja from "../assets/nerja-balcon-view.jpg";
 import Footer from "../components/Footer/Footer";
-import ScrollToTop from "../util/ScrollToTop";
 import Form from "../components/Form/Form"
 import { useParams } from "react-router-dom";                
 import "slick-carousel/slick/slick.css"; 
@@ -96,8 +94,6 @@ const { apartmentId } = useParams();
       : [];
   return (
     <>
-      <ScrollToTop />
-      <Navbar />
       <HomeHero
         cName="hero-mid"
         heroImg={Nerja}
