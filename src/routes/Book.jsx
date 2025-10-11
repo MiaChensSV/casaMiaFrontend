@@ -71,7 +71,7 @@ import SecondBedroom3 from "../assets/casa-stella/second-bedroom3.jpg";
 
 
 
-function Contact() {
+function Book() {
 const { apartmentId } = useParams();
 
   const apartmentName =
@@ -79,7 +79,7 @@ const { apartmentId } = useParams();
       ? "Casa Mia"
       : apartmentId === "casa-stella"
       ? "Casa Stella"
-      : "Contact";
+      : "Book";
 
   const galleryImages =
     apartmentId === "casa-mia"
@@ -143,4 +143,4 @@ const { apartmentId } = useParams();
   );
 }
 
-export default Contact;
+export default Book;

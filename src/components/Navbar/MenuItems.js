@@ -36,12 +36,12 @@ export const getMenuItems = (mode = "home") => {
         ],
       },
       {
-        title: "Contact",
+        title: "Book",
         cName: "nav-links",
         icon: "fa-solid fa-image",
         dropdown: [
-          { title: "Casa Mia",    url: "/casa-mia/contact",    cName: "dropdown-link" },
-          { title: "Casa Stella", url: "/casa-stella/contact", cName: "dropdown-link" },
+          { title: "Casa Mia",    url: "/casa-mia/book",    cName: "dropdown-link" },
+          { title: "Casa Stella", url: "/casa-stella/book", cName: "dropdown-link" },
         ],
       },
       {
@@ -86,8 +86,8 @@ export const getMenuItems = (mode = "home") => {
       icon: "fa-solid fa-image",
     },
     {
-      title: "Contact",
-      url: "/contact",
+      title: "Book",
+      url: "/book",
       cName: "nav-links",
       icon: "fa-solid fa-address-book",
     },

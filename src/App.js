@@ -4,7 +4,7 @@ import Home from "./routes/Home";
 import Apartment from "./routes/Apartment";
 import Nerja from "./routes/Nerja";
 import AvailabilityAndPrice from "./routes/AvailabilityAndPrice";
-import Contact from "./routes/Contact";
+import Book from "./routes/Book";
 import { Route, Routes } from "react-router-dom";
 import Pictures from "./routes/Photos";
 import NerjaBeaches from "./routes/NerjaBeaches";
@@ -42,7 +42,7 @@ function App() {
           <Route path="/:apartmentId/apartment" element={<Apartment />} />
           <Route path="/:apartmentId/price" element={<AvailabilityAndPrice />} />
           <Route path="/:apartmentId/photos" element={<Pictures />} />
-          <Route path="/:apartmentId/contact" element={<Contact />} />
+          <Route path="/:apartmentId/book" element={<Book />} />
           <Route path="/casa-mia/activities" element={<Activities />} />
           <Route path="/casa-mia/excursions" element={<Excursions />} />
           <Route path="/casa-mia/restaurants" element={<Restaurants />} />

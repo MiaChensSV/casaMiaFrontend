@@ -69,8 +69,33 @@ class Navbar extends Component {
   };
 
   handleApartmentSelect = (apartment) => {
+   const currentPath = this.props.location.pathname;
+
+  // 👇 If already on same apartment, just close the banner
+    if (currentPath.startsWith(`/${apartment}`)) {
+      this.closeBookingBanner();
+      return;
+    }
+
+    // 👇 Define your shared pages (same as in your render method)
+    const sharedPages = ["/activities", "/excursions", "/restaurants", "/beaches"];
+
+    // 👇 Check if current path is one of them
+    const isSharedPage = sharedPages.some((shared) => currentPath === shared);
+
+    let newPath;
+    if (isSharedPage) {
+      // 🧭 Shared page: just stay on it (no prefixing)
+      newPath = currentPath;
+    } else {
+      // 🧭 Regular path: replace apartment prefix with new one
+      const restPath = currentPath.split("/").slice(2).join("/");
+      newPath = `/${apartment}${restPath ? `/${restPath}` : ""}`;
+    }
+
+
     this.closeBookingBanner();
-    this.props.navigate(`/${apartment}/contact`);
+    this.props.navigate(newPath);
   };
   render() {
     const { pathRoot } = this.props;
@@ -148,7 +173,7 @@ class Navbar extends Component {
         <div className="mobile-title-container">
           {logoText && <span className="mobile-title">{logoText}</span>}
           <button className="mobile-book-btn" onClick={this.openBookingBanner}>
-            Book
+            Select Apartment
           </button>
         </div>
           <ul className={
@@ -163,7 +188,7 @@ class Navbar extends Component {
                       "/apartment",
                       "/price",
                       "/photos",
-                      "/contact",
+                      "/book",
                       "/activities",
                       "/excursions",
                       "/restaurants",
@@ -233,7 +258,7 @@ class Navbar extends Component {
           {/* 📌 Book Button — only shows if no apartment selected */}
               {showBookButton && (
                 <li className="nav-book-btn" onClick={this.openBookingBanner}>
-                  <button>Book</button>
+                  <button>Select Apartment</button>
                 </li>
               )}
         </nav>
