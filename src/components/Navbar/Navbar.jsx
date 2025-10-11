@@ -157,25 +157,26 @@ class Navbar extends Component {
     return (
       <>
         <nav className="NavbarItems">
-            <div className={`navbar-logo ${showBookButton ? "hidden" : ""}`}>
-              <Link to="/casa-mia/apartment" className="nav-apartment-link">Casa Mia</Link>
-              {" | "}
-              <Link to="/casa-stella/apartment" className="nav-apartment-link">Casa Stella</Link>
-            </div>
+            
+        {/* 🏡 Left: Casa Mia / Casa Stella / Both on large screens */}
+        <div className="navbar-logo">
+          {logoText && <span className="desktop-title">{logoText}</span>}
+        </div>
 
+        {/* 🍔 Mobile Menu Icon (right, hidden on desktop) */}
+        <div className="menu-icons" onClick={this.handleClick}>
+          <i className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}></i>
+        </div>
 
-          <div className="menu-icons" onClick={this.handleClick}>
-            <i
-              className={this.state.clicked ? "fas fa-times" : "fas fa-bars"}
-            ></i>
-          </div>
-         {/* mobile title + book (always render; title is optional) */}
+        {/* 📱 Mobile title + Select Apartment button (only visible on small screens) */}
         <div className="mobile-title-container">
           {logoText && <span className="mobile-title">{logoText}</span>}
           <button className="mobile-book-btn" onClick={this.openBookingBanner}>
             Select Apartment
           </button>
         </div>
+
+          
           <ul className={
             (this.state.clicked ? "nav-menu active" : "nav-menu") +
             (showBookButton ? " nav-center" : "")
